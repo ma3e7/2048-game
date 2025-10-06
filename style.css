@@ -11,14 +11,26 @@ body {
 }
 
 .board-container {
+    background-color: black;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
+    gap: 10px;
 }
 
-.game-cell {
-  width: 70px;
-  height: 70px;
-  border: 1px solid ;
-  box-sizing: border-box;
+.tile {
+    background-color: orange;
+    width: 100px;
+    height: 100px;
+    border: 1px solid;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: xx-large;
+}
+
+.tile:hover {
+    background-color: aqua;
+    cursor: pointer;
 }
