@@ -1,41 +1,69 @@
 const tiles = document.querySelectorAll('.tile');
 
-const boardMatrix = [[{id:1, value:''}, {id:2, value:''}, {id:3, value:''}, {id:4, value:''}], 
-                    [{id:5, value:''}, {id:6, value:''}, {id:7, value:''}, {id:8, value:''}], 
-                    [{id:9, value:''}, {id:10, value:''}, {id:11, value:''}, {id:12, value:''}],
-                    [{id:13, value:''}, {id:14, value:''}, {id:15, value:''}, {id:16, value:''}]]
-
-console.log(boardMatrix[0][2].value);
-
+const boardMatrix = [
+    [{id:1, value:''}, {id:2, value:''}, {id:3, value:''}, {id:4, value:''}],
+    [{id:5, value:''}, {id:6, value:''}, {id:7, value:''}, {id:8, value:''}],
+    [{id:9, value:''}, {id:10, value:''}, {id:11, value:''}, {id:12, value:''}],
+    [{id:13, value:''}, {id:14, value:''}, {id:15, value:''}, {id:16, value:''}]
+];
 
 document.addEventListener('keydown', (e) => {
     if (e.key.startsWith('Arrow')) {
         switch(e.key) {
             case 'ArrowUp':
                 console.log('Arrow UP')
-                break
+                break;
             case 'ArrowDown': 
                 console.log('arrow down')
-                break
+                break;
             case 'ArrowLeft':
                 console.log('arrow left');
-                break
+                break;
             case 'ArrowRight': 
-                console.log('aroow right');
-                break
+                console.log('arrow right');
+                break;
         }
     }
-})
+});
 
-const randomiseStartingNumbers = Math.random() < 0.9 ? 2 : 4
+function spawnRandomTile() {
+    const emptyTiles = boardMatrix.flat().filter(tile => tile.value === '');
+    console.log("Empty tiles: ", emptyTiles);
+    if (emptyTiles.length === 0) return;
 
-const flatMatrix = boardMatrix.flat();
+    const randomTile = emptyTiles[Math.floor(Math.random() * emptyTiles.length)];
+    randomTile.value = Math.random() < 0.9 ? 2 : 4;
+}
 
-const emptyTiles = flatMatrix.filter(tile => tile.value === '');
+// function spawnRandomTile() {
+//     const flatTiles = boardMatrix.flat();
+//     const emptyTiles = [];
 
-const randomTile = emptyTiles[Math.floor(Math.random() * emptyTiles.length)];
+//     flatTiles.forEach(tile => {
+//         if (tile.value === '') {
+//             emptyTiles.push(tile);
+//         }
+//     });
 
-randomTile.value = randomiseStartingNumbers
+//     console.log("Empty tiles:", emptyTiles);
 
-console.log('Random tile:', randomTile);
+//     if (emptyTiles.length === 0) return;
+
+//     const randomTile = emptyTiles[Math.floor(Math.random() * emptyTiles.length)];
+//     randomTile.value = Math.random() < 0.9 ? 2 : 4;
+// }
+
+
+function updateBoard() {
+    boardMatrix.flat().forEach(tile => {
+        const htmlTile = document.getElementById(tile.id);
+        htmlTile.innerText = tile.value === '' ? '' : tile.value;
+    });
+}
+
+spawnRandomTile();
+spawnRandomTile();
+spawnRandomTile();
+updateBoard();
+
 console.log(boardMatrix);
