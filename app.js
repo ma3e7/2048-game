@@ -1,4 +1,6 @@
-const tiles = document.querySelectorAll(".tile");
+const scoreElement = document.querySelector("#score-tracker")
+
+let score = null;
 
 const boardMatrix = [
     [
@@ -32,12 +34,22 @@ document.addEventListener("keydown", (e) => {
         switch (e.key) {
             case "ArrowUp":
                 console.log("Arrow UP");
+                var transposedMatrix = transpose(boardMatrix);
+                transposedMatrix.forEach(row => slideRowLeft(row))
                 spawnRandomTile();
                 updateBoard();
                 break;
 
             case "ArrowDown":
                 console.log("arrow down");
+                var transposedMatrix = transpose(boardMatrix);
+                transposedMatrix.forEach(row => {
+                    row.reverse();
+                    slideRowLeft(row);
+                    row.reverse();
+                })
+                spawnRandomTile();
+                updateBoard();
                 break;
             case "ArrowLeft":
                 console.log("arrow left");
@@ -61,7 +73,7 @@ document.addEventListener("keydown", (e) => {
 
 function spawnRandomTile() {
     const emptyTiles = boardMatrix.flat().filter((tile) => tile.value === '');
-    
+
     console.log('EMPTY tiles: ', emptyTiles);
     if (emptyTiles.length === 0) return;
 
@@ -81,6 +93,7 @@ function slideRowLeft(row) {
     for (let i = 0; i < values.length - 1; i++) {
         if (values[i] === values[i + 1]) {
             values[i] *= 2;
+            calculateScore(values[i]);
             values[i + 1] = '';
         }
     }
@@ -94,6 +107,30 @@ function slideRowLeft(row) {
     }
 }
 
+
+function transpose(boardMatrixatrix) {
+    const size = boardMatrixatrix.length;
+    const newMatrix = Array.from({ length: size }, () => Array(size).fill(null));
+
+    for (let i = 0; i < size; i++) {
+        for (let j = 0; j < size; j++) {
+            newMatrix[i][j] = boardMatrixatrix[j][i];
+        }
+    }
+    return newMatrix;
+}
+
+function calculateScore(combinedTilesValue) {
+    score += combinedTilesValue;
+    scoreElement.innerHTML = score;
+    if (score === 2048) {
+        winCondition()
+    }
+}
+
+function winCondition() {
+
+}
 
 spawnRandomTile();
 spawnRandomTile();

@@ -5,9 +5,34 @@
 
 body {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
+}
+
+#header-container {
+    width: 100vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 8%;
+}
+
+#score-reset-container {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    gap: 50px;
+}
+
+#score-tracker {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    width: 100px;
+    height: 40px;
+    border: 1px black solid;
 }
 
 .board-container {
@@ -28,9 +53,4 @@ body {
     align-items: center;
     justify-content: center;
     font-size: xx-large;
-}
-
-.tile:hover {
-    background-color: aqua;
-    cursor: pointer;
 }
