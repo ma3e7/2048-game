@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style.css" />
     <script src="/app.js" defer></script>
     <title>2048 Game</title>
@@ -37,12 +38,20 @@
         <div class="tile" id="15"></div>
         <div class="tile" id="16"></div>
     </main>
+    <!---------- POPUP GAME START ---------->
+    <!-- <div id="welcome-popup-window">
+        <h2>Welcome to the 2048!</h2>
+        <br>
+        <p>Use your arrow keys (↑ ↓ ← →) to move the tiles. <br>When two tiles with the same number touch, they merge into one. <br> Your goal is to create the 2048 tile! <br><br><hr><br>Good luck and have fun!</p></p>
+        <br>
+        <button id="play-button">Play</button>
+    </div> -->
 
-    <!---------- POPUP ---------->
-    <div id="popup-window" class="hidden">
+    <!---------- POPUP GAME END ---------->
+    <div id="popup-window" >
         <div id="popup-content-container">
             <h2 id="popup-message"></h2>
-            <p id="popup-score"></p>
+            <p id="popup-score">
             <div id="popup-buttons">
                 <button id="keep-playing">Keep Playing</button>
                 <button id="reset-game">Restart</button>

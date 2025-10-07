@@ -3,12 +3,23 @@
     padding: 0;
 }
 
+body, h1, h2, button, .tile, #score-tracker, #popup-message, #popup-score {
+    font-family: 'Montserrat', sans-serif;
+    color: #2C2A4A;
+}
+
+
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
+    background-color: #8CA6A3;
+}
+
+h1 {
+ font-size: 3em;
 }
 
 #header-container {
@@ -16,7 +27,7 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin-bottom: 8%;
+    margin-bottom: 5%;
 }
 
 #score-reset-container {
@@ -30,42 +41,48 @@ body {
     display: flex;
     justify-content:center;
     align-items: center;
-    width: 100px;
+    width: 150px;
     height: 40px;
+    font-size: large;
+    font-weight: bold;
 }
 
 .board-container {
-    background-color: black;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
     gap: 10px;
+    background-color: #4B3F72;
+    border: #4B3F72 10px solid;
+    border-radius: 10px;
 }
 
 .tile {
-    background-color: orange;
     width: 100px;
     height: 100px;
-    border: 1px solid;
-    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: xx-large;
     transition: background-color 0.2s ease, transform 0.1s ease;
+    border-radius: 10px;
 }
 
 #reset-button {
-    background-color: #f65e3b;
-    color: #f9f6f2;
+    background-color: #D8B4A6;
+    font-size: large;
+    font-weight: bold;
+    color: #2C2A4A;
     height: 50px;
     width: 100px;
     border: none;
+    transition: background 1s;
+    border-radius: 10px;
 }
 
 #reset-button:hover{
     cursor: pointer;
-    background-color: #b44129;
+    background-color: #F7BFA0;
     box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.5);
 }
 /* -----------------POPUP--------------------*/
@@ -86,7 +103,7 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background: #faf8ef;
+    background-color: #F0EAD6;
     border-radius: 10px;
     padding: 30px 40px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.7);
@@ -106,6 +123,7 @@ body {
     display: flex;
     justify-content: center;
     gap: 20px;
+    border-radius: 10px;
 }
 
 #popup-buttons button {
@@ -118,15 +136,19 @@ body {
 }
 
 #keep-playing {
-    background: #8f7a66;
-    color: #fff;
+    background-color: #8CA6A3;
+    color: #2E1F1A;
+}
+
+#keep-playing:hover {
+    background-color: #A5A58D; 
 }
 
 #reset-game {
-    background: #edc22e;
-    color: #fff;
+    background-color: #FFE156;
+    color: #2E1F1A;
 }
 
-.hidden {
-    display: none;
+#reset-game:hover {
+    background-color: #F7BFA0;
 }

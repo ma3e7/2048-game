@@ -9,14 +9,15 @@ const resetGameBtnMainPage = document.getElementById("reset-button");
 let gameOver = false;
 let gameWon = false;
 let score = 0;
+let hasWonBefore = false;
 
 scoreElement.innerHTML = `Score: ${score}`;
 
 const boardMatrix = [
     [
-        { id: 1, value: "1024" },
+        { id: 1, value: "" },
         { id: 2, value: "" },
-        { id: 3, value: "1024" },
+        { id: 3, value: "" },
         { id: 4, value: "" },
     ],
     [
@@ -102,7 +103,9 @@ function updateBoard() {
 
         htmlTile.innerText = tile.value === "" ? "" : tile.value;
         htmlTile.style.backgroundColor = getTileColor(tile.value);
-        htmlTile.style.color = tile.value <= 4 ? "#776e65" : "#f9f6f2";
+        htmlTile.style.color = tile.value <= 16 ? "#4B3F72" : "#2C2A4A";
+
+
     });
 
     if (!gameOver && !gameWon) {
@@ -165,39 +168,50 @@ function checkLoseCondition() {
 }
 
 function gameIsWon() {
-    popupMessage.innerText = "You won!";
-    popupScore.innerText = `Score: ${score}`;
-    popup.style.visibility = "visible";
+    if (!hasWonBefore) {  
+        gameWon = true;
+        hasWonBefore = true;
+        popupMessage.innerText = "You won!";
+        popupScore.innerText = `Score: ${score}`;
+        popup.style.visibility = "visible";
+
+        keepPlayingBtn.disabled = false;
+        keepPlayingBtn.style.cursor = "pointer";
+        keepPlayingBtn.style.opacity = "1";
+    }
 }
+
+
 
 function gameIsLost() {
     gameOver = true;
     popupMessage.innerText = "Game Over!";
     popupScore.innerText = `Score: ${score}`;
     popup.style.visibility = "visible";
-}
-
-function keepPlaying() {
-    if (score === 2048) {
-        popup.style.visibility = "hidden";
-        gameOver = false;
-        gameWon = false;
-    }
 
     keepPlayingBtn.disabled = true;
-    keepPlayingBtn.style.cursor = "not-allowed";
     keepPlayingBtn.style.opacity = "0.6";
 }
 
 
+function keepPlaying() {
+    popup.style.visibility = "hidden";
+    gameOver = false;
+    gameWon = false;
+
+    keepPlayingBtn.disabled = true;
+    keepPlayingBtn.style.opacity = "0.6";
+}
+
 function resetGame() {
     boardMatrix.flat().forEach(tile => tile.value = "");
     score = 0;
-    scoreElement.innerHTML = score;
+    scoreElement.innerHTML = `Score: ${score}`;
     gameOver = false;
     gameWon = false;
-    popup.style.visibility = "hidden"
-    startGame()
+    hasWonBefore = false;  
+    popup.style.visibility = "hidden";
+    startGame();
 }
 
 function startGame() {
@@ -208,18 +222,18 @@ function startGame() {
 
 function getTileColor(value) {
     switch (value) {
-        case 2: return "#eee4da";
-        case 4: return "#ede0c8";
-        case 8: return "#f2b179";
-        case 16: return "#f59563";
-        case 32: return "#f67c5f";
-        case 64: return "#f65e3b";
-        case 128: return "#edcf72";
-        case 256: return "#edcc61";
-        case 512: return "#edc850";
-        case 1024: return "#edc53f";
-        case 2048: return "#edc22e";
-        default: return "#cdc1b4";
+        case 2: return "#F7E8C4";    
+        case 4: return "#D8B4A6";    
+        case 8: return "#A5A58D";   
+        case 16: return "#E3C9A8";  
+        case 32: return "#BFA5A0";  
+        case 64: return "#8CA6A3";   
+        case 128: return "#F2D4C8"; 
+        case 256: return "#D1B6E1"; 
+        case 512: return "#C4DFAA";  
+        case 1024: return "#F7BFA0"; 
+        case 2048: return "#FFE156"; 
+        default: return "#F0EAD6";  
     }
 }
 
