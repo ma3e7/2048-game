@@ -1,39 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/style.css">
-        <script src="/app.js" defer></script>
-        <title>2048 Game</title>
-    </head>
-    <body>
-        <header id="header-container">
-            <div id="game-title">
-                <h1>2048</h1>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/app.js" defer></script>
+    <title>2048 Game</title>
+</head>
+
+<body>
+    <header id="header-container">
+        <div id="game-title">
+            <h1>2048</h1>
+        </div>
+        <div id="score-reset-container">
+            <div id="score-tracker"></div>
+            <button id="reset-button">Restart</button>
+        </div>
+    </header>
+    <main class="board-container">
+        <div class="tile" id="1"></div>
+        <div class="tile" id="2"></div>
+        <div class="tile" id="3"></div>
+        <div class="tile" id="4"></div>
+        <div class="tile" id="5"></div>
+        <div class="tile" id="6"></div>
+        <div class="tile" id="7"></div>
+        <div class="tile" id="8"></div>
+        <div class="tile" id="9"></div>
+        <div class="tile" id="10"></div>
+        <div class="tile" id="11"></div>
+        <div class="tile" id="12"></div>
+        <div class="tile" id="13"></div>
+        <div class="tile" id="14"></div>
+        <div class="tile" id="15"></div>
+        <div class="tile" id="16"></div>
+    </main>
+
+    <!---------- POPUP ---------->
+    <div id="popup-window" class="hidden">
+        <div id="popup-content-container">
+            <h2 id="popup-message"></h2>
+            <p id="popup-score"></p>
+            <div id="popup-buttons">
+                <button id="keep-playing">Keep Playing</button>
+                <button id="reset-game">Restart</button>
             </div>
-            <div id="score-reset-container">
-                <div id="score-tracker"></div>
-                <button id="reset-button">Restart</button>
-            </div>
-        </header>
-        <main class="board-container">
-            <div class="tile" id="1"></div> 
-            <div class="tile" id="2"></div>
-            <div class="tile" id="3"></div>
-            <div class="tile" id="4"></div>
-            <div class="tile" id="5"></div>
-            <div class="tile" id="6"></div>
-            <div class="tile" id="7"></div>
-            <div class="tile" id="8"></div>
-            <div class="tile" id="9"></div>
-            <div class="tile" id="10"></div>
-            <div class="tile" id="11"></div>
-            <div class="tile" id="12"></div>
-            <div class="tile" id="13"></div>
-            <div class="tile" id="14"></div>
-            <div class="tile" id="15"></div>
-            <div class="tile" id="16"></div>
-        </main>
-    </body>
+        </div>
+    </div>
+</body>
+
 </html>
