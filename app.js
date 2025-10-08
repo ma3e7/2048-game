@@ -4,7 +4,10 @@ const popupMessage = document.getElementById("popup-message");
 const popupScore = document.getElementById("popup-score");
 const keepPlayingBtn = document.getElementById("keep-playing");
 const resetGameBtn = document.getElementById("reset-game");
+const welcomePopup = document.getElementById("welcome-popup-window")
 const resetGameBtnMainPage = document.getElementById("reset-button");
+const playGameBtn = document.getElementById('play-button');
+const playingBoard = document.querySelector('.board-container');
 
 let gameOver = false;
 let gameWon = false;
@@ -77,6 +80,7 @@ document.addEventListener("keydown", (e) => {
         }
     }
 });
+
 keepPlayingBtn.addEventListener("click", () => {
     keepPlaying();
 })
@@ -87,6 +91,10 @@ resetGameBtn.addEventListener("click", () => {
 
 resetGameBtnMainPage.addEventListener("click", () => {
     resetGame();
+})
+
+playGameBtn.addEventListener("click", () => {
+    playGame()
 })
 
 function spawnRandomTile() {
@@ -181,8 +189,6 @@ function gameIsWon() {
     }
 }
 
-
-
 function gameIsLost() {
     gameOver = true;
     popupMessage.innerText = "Game Over!";
@@ -192,7 +198,6 @@ function gameIsLost() {
     keepPlayingBtn.disabled = true;
     keepPlayingBtn.style.opacity = "0.6";
 }
-
 
 function keepPlaying() {
     popup.style.visibility = "hidden";
@@ -211,10 +216,13 @@ function resetGame() {
     gameWon = false;
     hasWonBefore = false;  
     popup.style.visibility = "hidden";
-    startGame();
+    playGame();
 }
 
-function startGame() {
+function playGame() {
+    welcomePopup.style.visibility = "hidden";
+    playingBoard.classList.add("visible");
+
     spawnRandomTile();
     spawnRandomTile();
     updateBoard();
@@ -236,5 +244,3 @@ function getTileColor(value) {
         default: return "#F0EAD6";  
     }
 }
-
-startGame();

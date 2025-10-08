@@ -3,11 +3,17 @@
     padding: 0;
 }
 
-body, h1, h2, button, .tile, #score-tracker, #popup-message, #popup-score {
+body,
+h1,
+h2,
+button,
+.tile,
+#score-tracker,
+#popup-message,
+#popup-score {
     font-family: 'Montserrat', sans-serif;
     color: #2C2A4A;
 }
-
 
 body {
     display: flex;
@@ -19,7 +25,7 @@ body {
 }
 
 h1 {
- font-size: 3em;
+    font-size: 3em;
 }
 
 #header-container {
@@ -32,14 +38,14 @@ h1 {
 
 #score-reset-container {
     display: flex;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
     gap: 50px;
 }
 
 #score-tracker {
     display: flex;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
     width: 150px;
     height: 40px;
@@ -55,6 +61,17 @@ h1 {
     background-color: #4B3F72;
     border: #4B3F72 10px solid;
     border-radius: 10px;
+    transition: background 5s;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 2s ease, transform 2s ease;
+    visibility: hidden;
+}
+
+.board-container.visible {
+    opacity: 1;
+    transform: scale(1);
+    visibility: visible;
 }
 
 .tile {
@@ -80,12 +97,56 @@ h1 {
     border-radius: 10px;
 }
 
-#reset-button:hover{
+#reset-button:hover {
     cursor: pointer;
     background-color: #F7BFA0;
     box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.5);
 }
-/* -----------------POPUP--------------------*/
+
+/* -----------------POPUP WELCOME--------------------*/
+#welcome-popup-window {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+#welcome-content-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #F0EAD6;
+    border-radius: 10px;
+    padding: 30px 40px;
+    width: 30vw;
+    height: 30vh;
+    overflow: scroll;
+}
+
+#play-button {
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    transition: background 1s;
+    background-color: #8CA6A3;
+    color: #2E1F1A;
+}
+
+#play-button:hover {
+    background-color: #A5A58D;
+}
+
+#good-luck-text {
+    font-weight: bold;
+}
+
+/* -----------------POPUP END GAME--------------------*/
 #popup-window {
     position: fixed;
     width: 100vw;
@@ -106,7 +167,7 @@ h1 {
     background-color: #F0EAD6;
     border-radius: 10px;
     padding: 30px 40px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.7);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
 }
 
 #popup-window h2 {
@@ -141,14 +202,17 @@ h1 {
 }
 
 #keep-playing:hover {
-    background-color: #A5A58D; 
+    background-color: #A5A58D;
 }
 
 #reset-game {
-    background-color: #FFE156;
-    color: #2E1F1A;
+    background-color: #D8B4A6;
+    font-size: large;
+    font-weight: bold;
+    color: #2C2A4A;
 }
 
 #reset-game:hover {
+    cursor: pointer;
     background-color: #F7BFA0;
 }
