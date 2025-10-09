@@ -6,13 +6,18 @@ const keepPlayingBtn = document.getElementById("keep-playing");
 const resetGameBtn = document.getElementById("reset-game");
 const welcomePopup = document.getElementById("welcome-popup-window")
 const resetGameBtnMainPage = document.getElementById("reset-button");
-const playGameBtn = document.getElementById('play-button');
-const playingBoard = document.querySelector('.board-container');
+const playGameBtn = document.getElementById("play-button");
+const playingBoard = document.querySelector(".board-container");
+const highScoreElement = document.getElementById("highscore-tracker");
+
 
 let gameOver = false;
 let gameWon = false;
 let score = 0;
 let hasWonBefore = false;
+
+let highScore = localStorage.getItem('highScore') ? parseInt(localStorage.getItem('highScore')) : 0;
+highScoreElement.innerHTML = `High Score: ${highScore}`;
 
 scoreElement.innerHTML = `Score: ${score}`;
 
@@ -49,8 +54,7 @@ document.addEventListener("keydown", (e) => {
             case "ArrowUp":
                 var transposedMatrix = transpose(boardMatrix);
                 transposedMatrix.forEach(row => slideRowLeft(row))
-                spawnRandomTile();
-                updateBoard();
+                updateState() 
                 break;
 
             case "ArrowDown":
@@ -60,13 +64,11 @@ document.addEventListener("keydown", (e) => {
                     slideRowLeft(row);
                     row.reverse();
                 })
-                spawnRandomTile();
-                updateBoard();
+                updateState() 
                 break;
             case "ArrowLeft":
                 boardMatrix.forEach(row => slideRowLeft(row));
-                spawnRandomTile();
-                updateBoard();
+                updateState() 
                 break;
             case "ArrowRight":
                 boardMatrix.forEach(row => {
@@ -74,8 +76,7 @@ document.addEventListener("keydown", (e) => {
                     slideRowLeft(row);
                     row.reverse();
                 });
-                spawnRandomTile();
-                updateBoard();
+                updateState()
                 break;
         }
     }
@@ -154,11 +155,18 @@ function transpose(boardMatrixatrix) {
 function calculateScore(combinedTilesValue) {
     score += combinedTilesValue;
     scoreElement.innerHTML = `Score: ${score}`;
+
+    if (score > highScore) {
+        highScore = score;
+        highScoreElement.innerHTML = `High Score: ${highScore}`;
+        localStorage.setItem('highScore', highScore);
+    }
 }
 
+
 function checkLoseCondition() {
-    const emptyTiles = boardMatrix.flat().every(tile => tile.value !== "");
-    if (!emptyTiles) return false;
+    const allFilledTiles = boardMatrix.flat().every(tile => tile.value !== "");
+    if (!allFilledTiles) return false;
 
     for (let i = 0; i < 4; i++) {
         for (let j = 0; j < 4; j++) {
@@ -224,6 +232,11 @@ function playGame() {
     playingBoard.classList.add("visible");
 
     spawnRandomTile();
+    spawnRandomTile();
+    updateBoard();
+}
+
+function updateState() {
     spawnRandomTile();
     updateBoard();
 }

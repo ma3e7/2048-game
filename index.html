@@ -16,7 +16,8 @@
             <h1>2048</h1>
         </div>
         <div id="score-reset-container">
-            <div id="score-tracker"></div>
+            <div id="highscore-tracker">High Score: 0</div>
+            <div id="score-tracker">Score: 0</div>
             <button id="reset-button">Restart</button>
         </div>
     </header>
@@ -38,14 +39,14 @@
         <div class="tile" id="15"></div>
         <div class="tile" id="16"></div>
     </main>
-    
+
     <!--------------- POPUP GAME START --------------->
     <div id="welcome-popup-window">
         <div id="welcome-content-container">
             <h2>Welcome to the 2048!</h2>
             <br>
             <p>Use your arrow keys (↑ ↓ ← →) to move the tiles. When two tiles with the same number touch, they
-                merge into one. Your goal is to create the 2048 tile! 
+                merge into one. Your goal is to create the 2048 tile!
                 <br>
                 <br>
                 <hr>
@@ -64,7 +65,7 @@
             <p id="popup-score">
             <div id="popup-buttons">
                 <button id="keep-playing">Keep Playing</button>
-                <button id="reset-game">Restart</button>
+                <button id="reset-game">Play Again</button>
             </div>
         </div>
     </div>
