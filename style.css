@@ -130,8 +130,8 @@ h1 {
 }
 
 #go-back-icon {
-    width: 80px;    
-    height: 80px;   
+    width: 80%;    
+    height: 80%;   
     object-fit: contain; 
     display: block;
     pointer-events: none; 
