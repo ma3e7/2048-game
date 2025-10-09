@@ -5,7 +5,7 @@
 I chose this game as my project because it presented an exciting challenge and gave me the opportunity to deepen my understanding of JavaScript, DOM manipulation, and game logic while creating something interactive and fun.
 
 ## Deployment Link
-
+[Click me to play the game!](https://ma3e7.github.io/2048-game/)
 ## Technologies Used
 
 ***HTML*** - used for creating main board, welcome and game over messages
