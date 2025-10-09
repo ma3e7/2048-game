@@ -1,6 +1,5 @@
 # Game: 2048
 ## Description
-
 **2048** is a game where the goal is to combine numbered tiles on a 4x4 grid to create a tile with the number 2048. Once the player creates a 2048 tile, they can choose to keep playing or reset the game and start over.
 
 I chose this game as my project because it presented an exciting challenge and gave me the opportunity to deepen my understanding of JavaScript, DOM manipulation, and game logic while creating something interactive and fun.
@@ -15,9 +14,14 @@ I chose this game as my project because it presented an exciting challenge and g
 
 ***Javascript*** - used for background logic
 
-## Game Flow
-![Welcome window](./assets%20/welcome-window-ss.png)
+## Resources Used
 
+* [Font: Montserrat](https://fonts.google.com/specimen/Montserrat)
+* [Icons](https://www.flaticon.com/free-icons/go-back)
+
+## Game Flow
+
+![Welcome window](./assets%20/welcome-window-ss.png)
 When the page loads the player is met with the welcome window, which gives short instructions on how to play the game. After pressing the button "Play", board loads and player can play the game. 
 
 ![Playing board](./assets%20/game-board-ss.png)

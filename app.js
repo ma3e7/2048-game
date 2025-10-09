@@ -9,19 +9,24 @@ const resetGameBtnMainPage = document.getElementById("reset-button");
 const playGameBtn = document.getElementById("play-button");
 const playingBoard = document.querySelector(".board-container");
 const highScoreElement = document.getElementById("highscore-tracker");
+const goBackBtn = document.getElementById("go-back-btn");
 
 
 let gameOver = false;
 let gameWon = false;
 let score = 0;
+let previousScore = 0;
+let previousHighScore = 0;
 let hasWonBefore = false;
+let boardMatrixPreviousState = [];
+let undoUsed = false;
 
 let highScore = localStorage.getItem('highScore') ? parseInt(localStorage.getItem('highScore')) : 0;
 highScoreElement.innerHTML = `High Score: ${highScore}`;
 
 scoreElement.innerHTML = `Score: ${score}`;
 
-const boardMatrix = [
+let boardMatrix = [
     [
         { id: 1, value: "" },
         { id: 2, value: "" },
@@ -50,11 +55,15 @@ const boardMatrix = [
 
 document.addEventListener("keydown", (e) => {
     if (e.key.startsWith("Arrow")) {
+        if (!undoUsed && !gameOver && !gameWon) {
+            setPreviousState();
+        }
+        setPreviousState();
         switch (e.key) {
             case "ArrowUp":
                 var transposedMatrix = transpose(boardMatrix);
                 transposedMatrix.forEach(row => slideRowLeft(row))
-                updateState() 
+                updateState()
                 break;
 
             case "ArrowDown":
@@ -64,11 +73,11 @@ document.addEventListener("keydown", (e) => {
                     slideRowLeft(row);
                     row.reverse();
                 })
-                updateState() 
+                updateState()
                 break;
             case "ArrowLeft":
                 boardMatrix.forEach(row => slideRowLeft(row));
-                updateState() 
+                updateState()
                 break;
             case "ArrowRight":
                 boardMatrix.forEach(row => {
@@ -98,6 +107,10 @@ playGameBtn.addEventListener("click", () => {
     playGame()
 })
 
+goBackBtn.addEventListener("click", () => {
+    goBack()
+})
+
 function spawnRandomTile() {
     const emptyTiles = boardMatrix.flat().filter((tile) => tile.value === '');
     if (emptyTiles.length === 0) return;
@@ -113,13 +126,40 @@ function updateBoard() {
         htmlTile.innerText = tile.value === "" ? "" : tile.value;
         htmlTile.style.backgroundColor = getTileColor(tile.value);
         htmlTile.style.color = tile.value <= 16 ? "#4B3F72" : "#2C2A4A";
-
-
     });
 
     if (!gameOver && !gameWon) {
         checkLoseCondition();
     }
+}
+
+function goBack() {
+    if (!boardMatrixPreviousState.length || undoUsed) return;
+
+    boardMatrix = boardMatrixPreviousState.map(row => row.map(tile => ({ ...tile })));
+
+    score = previousScore;
+    highScore = previousHighScore;
+    scoreElement.innerHTML = `Score: ${score}`;
+    highScoreElement.innerHTML = `High Score: ${highScore}`;
+
+    localStorage.setItem('highScore', highScore);
+
+    updateBoard();
+
+    undoUsed = true;
+
+    goBackBtn.disabled = true;
+    goBackBtn.style.cursor = "not-allowed";
+    goBackBtn.style.opacity = "0.6";
+}
+
+function setPreviousState() {
+    if (undoUsed) return;
+
+    boardMatrixPreviousState = boardMatrix.map(row => row.map(tile => ({ ...tile })));
+    previousScore = score;
+    previousHighScore = highScore;
 }
 
 function slideRowLeft(row) {
@@ -163,7 +203,6 @@ function calculateScore(combinedTilesValue) {
     }
 }
 
-
 function checkLoseCondition() {
     const allFilledTiles = boardMatrix.flat().every(tile => tile.value !== "");
     if (!allFilledTiles) return false;
@@ -184,7 +223,7 @@ function checkLoseCondition() {
 }
 
 function gameIsWon() {
-    if (!hasWonBefore) {  
+    if (!hasWonBefore) {
         gameWon = true;
         hasWonBefore = true;
         popupMessage.innerText = "You won!";
@@ -218,16 +257,31 @@ function keepPlaying() {
 
 function resetGame() {
     boardMatrix.flat().forEach(tile => tile.value = "");
+
     score = 0;
     scoreElement.innerHTML = `Score: ${score}`;
     gameOver = false;
     gameWon = false;
-    hasWonBefore = false;  
+    hasWonBefore = false;
+
+    undoUsed = false;
+    boardMatrixPreviousState = [];
+
     popup.style.visibility = "hidden";
+
+    goBackBtn.disabled = true;
+    goBackBtn.style.cursor = "not-allowed";
+    goBackBtn.style.opacity = "0.6";
+
     playGame();
 }
 
 function playGame() {
+    goBackBtn.disabled = true;
+    goBackBtn.style.cursor = "not-allowed";
+    goBackBtn.style.opacity = "0.6";
+    undoUsed = false;
+
     welcomePopup.style.visibility = "hidden";
     playingBoard.classList.add("visible");
 
@@ -239,21 +293,27 @@ function playGame() {
 function updateState() {
     spawnRandomTile();
     updateBoard();
+
+    if (!undoUsed) {
+        goBackBtn.disabled = false;
+        goBackBtn.style.cursor = "pointer";
+        goBackBtn.style.opacity = "1";
+    }
 }
 
 function getTileColor(value) {
     switch (value) {
-        case 2: return "#F7E8C4";    
-        case 4: return "#D8B4A6";    
-        case 8: return "#A5A58D";   
-        case 16: return "#E3C9A8";  
-        case 32: return "#BFA5A0";  
-        case 64: return "#8CA6A3";   
-        case 128: return "#F2D4C8"; 
-        case 256: return "#D1B6E1"; 
-        case 512: return "#C4DFAA";  
-        case 1024: return "#F7BFA0"; 
-        case 2048: return "#FFE156"; 
-        default: return "#F0EAD6";  
+        case 2: return "#F7E8C4";
+        case 4: return "#D8B4A6";
+        case 8: return "#A5A58D";
+        case 16: return "#E3C9A8";
+        case 32: return "#BFA5A0";
+        case 64: return "#8CA6A3";
+        case 128: return "#F2D4C8";
+        case 256: return "#D1B6E1";
+        case 512: return "#C4DFAA";
+        case 1024: return "#F7BFA0";
+        case 2048: return "#FFE156";
+        default: return "#F0EAD6";
     }
 }

@@ -108,6 +108,36 @@ h1 {
     box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.5);
 }
 
+#go-back-btn {
+    background-color: #D8B4A6;
+    font-size: large;
+    font-weight: bold;
+    color: #2C2A4A;
+    height: 40px;
+    width: 70px;
+    border: none;
+    transition: background 1s;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#go-back-btn:hover {
+    cursor: pointer;
+    background-color: #F7BFA0;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.5);
+}
+
+#go-back-icon {
+    width: 80%;    
+    height: 80%;   
+    object-fit: contain; 
+    display: block;
+    pointer-events: none; 
+    color: #2C2A4A;
+}
+
 /* -----------------POPUP WELCOME--------------------*/
 #welcome-popup-window {
     position: fixed;
