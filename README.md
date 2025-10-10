@@ -21,10 +21,10 @@ I chose this game as my project because it presented an exciting challenge and g
 
 ## Game Flow
 
-![Welcome window](./assets%20/welcome-window-ss.png)
+![Welcome window](./assets/welcome-window-ss.png)
 When the page loads the player is met with the welcome window, which gives short instructions on how to play the game. After pressing the button "Play", board loads and player can play the game. 
 
-![Playing board](./assets%20/game-board-ss.png)
+![Playing board](./assets/game-board-ss.png)
 
 The player moves the tiles by pressing the arrow keys:
 * ↑ (Up Arrow): Moves all tiles upward
@@ -37,7 +37,7 @@ The player moves the tiles by pressing the arrow keys:
 
 When two tiles with the same number collide, they merge into one and their values add up.
 
-![Game over screen](./assets%20/game-end-ss.png)
+![Game over screen](./assets/game-end-ss.png)
 
 When there are no more possible moves, the game is over and the final score is displayed. Player can play again.
 
